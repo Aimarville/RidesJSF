@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+
+    <h:head>
+        <title>Login User</title>
+    </h:head>
+
+    <h:body>
+
+        <h:form id="loginForm">
+
+            <h3>User login</h3>
+
+            <table style="border-collapse: collapse; margin-top: 20px;">
+                
+                <tr>
+                    <td style="padding: 10px; font-weight: bold;">Erabiltzaile korreoa:</td>
+                    <td style="padding: 10px;">
+                        <h:inputText value="#{loginBean.mail}" required="true" requiredMessage='Erabiltzaile korreoa bete beharko duzu'/>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td style="padding: 10px; font-weight: bold;">Pasahitza:</td>
+                    <td style="padding: 10px;">
+                        <h:inputSecret id="password" value="#{loginBean.password}" required="true" requiredMessage='Pasahitza bete beharko duzu'/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td style="padding: 10px;">
+                        <h:commandButton value="Login" action="#{loginBean.login}"/>
+                    </td>
+                    <td></td>
+                    <td style="padding: 10px;">
+                    	<h:commandButton value="Register" action="register" immediate='true'/>
+                    </td>
+                </tr>
+
+            </table>
+            <h:messages id="mezuak" style="color:blue" />
+        </h:form>
+
+    </h:body>
+
+</f:view>
+</html>

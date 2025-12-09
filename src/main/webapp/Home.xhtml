@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>Rides25</title>
+	</h:head>
+	<h:body>
+		<h:form id="nireForm">
+			<h3>Choose option</h3>
+			<table style="border-collapse: collapse; margin-top: 20px;">
+				<tr>
+					<td style="padding: 10px; font-weight: bold;">Create ride:</td>
+					<td style="padding: 10px;"><h:commandButton
+							value="Create ride" action="create" /></td>
+				</tr>
+
+				<tr>
+					<td style="padding: 10px; font-weight: bold;">Query ride:</td>
+					<td style="padding: 10px;"><h:commandButton value="Query ride"
+							action="query" /></td>
+				</tr>
+				
+				<tr>
+					<td style="padding: 10px;"><h:commandButton value="Log Out"
+							action="logout" /></td>
+				</tr>
+			</table>
+		</h:form>
+	</h:body>
+</f:view>
+</html>

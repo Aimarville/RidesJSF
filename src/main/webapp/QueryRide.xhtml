@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+    <h:head>
+        <title>Query Rides</title>
+    </h:head>
+
+    <h:body>
+        <h:form id="queryForm">
+
+            <table>
+                <tr>
+                    <!-- Left column: selects -->
+                    <td>
+                        <table>
+                            <tr>
+                                <td>Depart City</td>
+                                <td>
+                                    <h:selectOneMenu value="#{query.departCity}" required="true" requiredMessage="Hasiera hiria aukeratu beharko duzu">
+                                    	<f:selectItem itemLabel="--Select origin--" itemValue="" />
+                                        <f:selectItems value="#{query.cities}" />
+                                        <f:ajax execute="@this" listener="#{query.onDepartCityChange}" render="arrival ridesTable"/>
+                                    </h:selectOneMenu>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Arrival City</td>
+                                <td>
+                                    <h:selectOneMenu id="arrival" value="#{query.arrivalCity}" required="true" requiredMessage="Nora joan nahi duzun aukeratu beharko duzu">
+                                    	<f:selectItem itemLabel="--Select arrival--" itemValue=""/>
+                                        <f:selectItems value="#{query.destinationCities}" />
+                                        <f:ajax execute="@this" listener="#{query.updateRides}" render="ridesTable"/>
+                                    </h:selectOneMenu>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <!-- Right column: calendar -->
+                    <td style="padding-left:40px;">
+                        <h3>Ride date</h3>
+                        <p:calendar value="#{query.date}" mode="inline" navigator="true" required="true" requiredMessage="Data aukeratu beharko duzu">
+                        	<p:ajax event="dateSelect" process="@this" listener="#{query.updateRides}" update="ridesTable"/>
+                        </p:calendar>
+                    </td>
+                </tr>
+            </table>
+
+            <br/>
+
+            <h3>Viajes: #{query.dateString}</h3>
+
+            <!-- Table of rides -->
+            <p:dataTable id="ridesTable" 
+            			value="#{query.rides}" 
+            			var="r"
+            			border="1" 
+            			emptyMessage="No rides" 
+            			selection="#{query.selectedRide}" 
+            			selectionMode="single" 
+            			rowKey="#{r.rideNumber}">
+                                
+                <p:column headerText="Driver">#{r.driver.name}</p:column>
+                <p:column headerText="Seats">#{r.nPlaces}</p:column>
+                <p:column headerText="Price">#{r.price}</p:column>
+            </p:dataTable>
+
+			<h3>Eserleku kopurua</h3>
+            
+            <h:inputText id="seats" value="#{query.seats}" required="true" requiredMessage="Eserleku kopuru bat aukeratu beharko duzu">
+            	<f:validateLongRange minimum="1"/>
+            </h:inputText>
+
+            <br/><br/>
+
+            <!-- Buttons -->
+            <table style="margin:auto;">
+                <tr>
+                	<td>
+                        <h:commandButton value="Query" action="#{query.queryRide}" style="width:150px;" update="@form" />
+                    </td>
+                    <td>
+                        <h:commandButton value="Close" action="home" style="width:150px;" immediate="true" update="@form" />
+                    </td>
+                </tr>
+            </table>
+            <h:messages id="mezuak" style="color:blue" />
+        </h:form>
+    </h:body>
+</f:view>
+
+</html>

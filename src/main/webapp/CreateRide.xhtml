@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+    <h:head>
+        <title>Create Ride</title>
+    </h:head>
+
+    <h:body>
+        <h:form id="rideForm">
+
+            <table>
+                <tr>
+                    <!-- Left column (text fields) -->
+                    <td>
+                        <table>
+                            <tr>
+                                <td>Depart City</td>
+                                <td><h:inputText value="#{ride.departCity}" required="true" requiredMessage="Not depart city error" /></td>
+                            </tr>
+
+                            <tr>
+                                <td>Arrival City</td>
+                                <td><h:inputText value="#{ride.arrivalCity}" required="true" requiredMessage="Not arrival city error" /></td>
+                            </tr>
+
+                            <tr>
+                                <td>Number of Seats</td>
+                                <td><h:inputText id="seats" value="#{ride.seats}" required="true" requiredMessage="Not seat quantity error" >
+                                	<f:validateLongRange minimum="1" maximum="100" />
+                                </h:inputText></td>
+                            </tr>
+
+                            <tr>
+                                <td>Price</td>
+                                <td><h:inputText value="#{ride.price}" required="true" requiredMessage="Not price error" >
+                                	<f:validateLongRange minimum="1" />
+                                </h:inputText></td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <!-- Right column: calendar -->
+                    <td style="padding-left:40px;">
+                        <h3>Ride date</h3>
+                        <p:calendar value="#{ride.date}" mode="inline" navigator="true" mindate="#{ride.today}" required="true" requiredMessage="Not date error" />
+                    </td>
+                </tr>
+            </table>
+
+            <br/><br/>
+
+            <!-- Buttons centered -->
+            <table style="margin:auto;">
+                <tr>
+                    <td>
+                        <h:commandButton value="Create Ride" action="#{ride.create}" style="width:150px;" update="@form" />
+                    </td>
+                    <td style="padding-left:30px;">
+                        <h:commandButton value="Close" action="home" style="width:150px;" immediate="true" />
+                    </td>
+                </tr>
+            </table>
+            <h:messages id="mezuak" style="color:blue" />
+        </h:form>
+    </h:body>
+</f:view>
+
+</html>
