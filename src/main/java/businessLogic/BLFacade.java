@@ -76,6 +76,8 @@ public interface BLFacade  {
    	public boolean loginUser(String mail, String password);
    	
    	public void queryRide(Ride ride, int seats);
+   	
+   	public List<Ride> getUserRides();
 
 	
 }

@@ -15,6 +15,8 @@ import exceptions.RideAlreadyExistException;
  */
 public class BLFacadeImplementation  implements BLFacade {
 	HibernateDataAccess dbManager;
+	
+	private User currentUser;
 
 	public BLFacadeImplementation()  {		
 		System.out.println("Creating BLFacadeImplementation instance");
@@ -102,7 +104,10 @@ public class BLFacadeImplementation  implements BLFacade {
 		
 		boolean done = false;
 		if (user == null) {
-			done = dbManager.createUser(name, surname, mail, password);
+			User newUser = new User(name, surname, mail, password);
+			done = dbManager.createUser(newUser);
+			if (done)
+				currentUser = newUser;
 		}
 		
 		return done;
@@ -114,9 +119,10 @@ public class BLFacadeImplementation  implements BLFacade {
 		User user = dbManager.getUser(mail);
 		
 		if (user != null) {
-			if (user.getPassword().equals(password))
+			if (user.getPassword().equals(password)) {
 				buelta = true;
-			else
+				currentUser = user;
+			}else
 				buelta = false;
 		}else
 			buelta = false;
@@ -125,7 +131,11 @@ public class BLFacadeImplementation  implements BLFacade {
 	}
 	
 	public void queryRide(Ride ride, int seats) {
-		dbManager.queryRide(ride, seats);
+		dbManager.queryRide(ride, seats, currentUser);
+	}
+	
+	public List<Ride> getUserRides() {
+		return dbManager.getUserRides(currentUser);
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -11,6 +12,14 @@ public class User implements Serializable {
 	private String name;
 	private String surname;
 	private String password;
+	
+	@ManyToMany
+	@JoinTable(
+		    name = "user_ride",
+		    joinColumns = @JoinColumn(name = "user_mail"),
+		    inverseJoinColumns = @JoinColumn(name = "ride_number")
+		)
+	private List<Ride> rideList;
 	
 	public User() {
 		super();
@@ -53,6 +62,14 @@ public class User implements Serializable {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<Ride> getRideList() {
+		return rideList;
+	}
+	
+	public void setRide(List<Ride> rideList) {
+		this.rideList = rideList;
 	}
 
 	@Override

@@ -253,15 +253,13 @@ public class HibernateDataAccess {
 		}
 	}
 	
-	public boolean createUser(String name, String surname, String mail, String password) {
+	public boolean createUser(User u) {
 		EntityManager db = JPAUtil.getEntityManager();
 		
 		try {
 			db.getTransaction().begin();
 			
-			User newUser = new User(name, surname, mail, password);
-			
-			db.persist(newUser);
+			db.persist(u);
 			
 			db.getTransaction().commit();
 			
@@ -274,17 +272,40 @@ public class HibernateDataAccess {
 		}
 	}
 	
-	public void queryRide(Ride ride, int seats) {
+	public void queryRide(Ride ride, int seats, User user) {
 		EntityManager db = JPAUtil.getEntityManager();
 		
 		try {
 			db.getTransaction().begin();
 			
-			ride.setBetMinimum(ride.getnPlaces() - seats);
+			Ride thisRide = db.find(Ride.class, ride.getRideNumber());
+			User thisUser = db.find(User.class, user.getMail());
 			
-			db.merge(ride);
+			thisRide.setBetMinimum(thisRide.getnPlaces() - seats);
+			
+			thisRide.getUserList().add(thisUser);
+			
+			db.merge(thisRide);
+			
+			thisUser.getRideList().add(thisRide);
+			db.merge(thisUser);
 			
 			db.getTransaction().commit();
+		}finally {
+			db.close();
+		}
+	}
+	
+	public List<Ride> getUserRides(User u) {
+		EntityManager db = JPAUtil.getEntityManager();
+		
+		try {
+			User user = db.find(User.class, u.getMail());
+			
+			if (user != null && user.getRideList().size() > 0) {
+				return user.getRideList();
+			}
+			return null;
 		}finally {
 			db.close();
 		}

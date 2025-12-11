@@ -2,6 +2,7 @@ package domain;
 
 import java.io.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -22,6 +23,9 @@ public class Ride implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="driver_email")
 	private Driver driver;
+	
+	@ManyToMany(mappedBy="rideList")
+	private List<User> userList;
 	
 	public Ride(){
 		super();
@@ -175,7 +179,13 @@ public class Ride implements Serializable {
 		this.price = price;
 	}
 
+	public List<User> getUserList() {
+		return userList;
+	}
 
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
+	}
 
 	public String toString(){
 		return rideNumber+";"+";"+origin+";"+destination+";"+date;  

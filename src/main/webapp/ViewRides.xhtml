@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>Rides25</title>
+	</h:head>
+	<h:body>
+		<h:form id="viewForm">
+			<h3>Your rides</h3>
+			<p:dataTable id="ridesTable" value="#{viewRides.rides}" var="r"
+				border="1" emptyMessage="No rides">
+
+				<p:column headerText="From">#{r.from}</p:column>
+				<p:column headerText="To">#{r.to}</p:column>
+				<p:column headerText="Date">#{r.date}</p:column>
+				<p:column headerText="Driver">#{r.driver.name}</p:column>
+			</p:dataTable>
+			
+			<table style="margin:auto;">
+                <tr>
+                    <td>
+                        <h:commandButton value="Close" action="home" style="width:150px;" immediate="true"/>
+                    </td>
+                </tr>
+            </table>
+		</h:form>
+	</h:body>
+</f:view>
+</html>
