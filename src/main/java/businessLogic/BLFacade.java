@@ -78,6 +78,8 @@ public interface BLFacade  {
    	public void queryRide(Ride ride, int seats);
    	
    	public List<Ride> getUserRides();
+   	
+   	public List<Ride> getDestinationCities();
 
 	
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>Rides25</title>
+	</h:head>
+	<h:body>
+		<h:form id="arrivalForm">
+            <p:dataTable id="ArrivalCities" value="#{viewRides.cities}" var="r"
+				border="1" emptyMessage="No rides">
+
+				<p:column headerText="ARRIVAL CITY">#{r.to}</p:column>
+				<p:column headerText="DRIVER EMAIL">#{r.driver.email}</p:column>
+				<p:column headerText="RIDE DATE">#{r.date}</p:column>
+				<p:column headerText="PRICE">#{r.price}</p:column>
+			</p:dataTable>
+			
+			<tr></tr>
+			
+			<td>Bidai kopurua</td>
+			<td><h:inputText value="#{viewRides.kop}"/></td>
+		</h:form>
+	</h:body>
+</f:view>
+</html>

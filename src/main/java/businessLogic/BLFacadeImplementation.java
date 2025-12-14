@@ -146,6 +146,11 @@ public class BLFacadeImplementation  implements BLFacade {
 		dbManager.initializeDB();
 		
 	}
+	 
+	public List<Ride> getDestinationCities() {
+		List<Ride> destination = dbManager.getArrivalCities();
+		return destination;
+	}
 
 }
 

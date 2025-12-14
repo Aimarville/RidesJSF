@@ -80,6 +80,15 @@ https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+		<display-name>Register.xhtml</display-name>
+		<from-view-id>/Register.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>selection</from-outcome>
+			<to-view-id>/ArrivalSelection.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
 	
 	<!-- Login to: -->
 	<navigation-rule>
@@ -106,6 +115,15 @@ https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd"
 		<navigation-case>
 			<from-outcome>home</from-outcome>
 			<to-view-id>/Home.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>ArrivalSelection.xhtml</display-name>
+		<from-view-id>/ArrivalSelection.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>arrivalView</from-outcome>
+			<to-view-id>/ArrivalView.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 

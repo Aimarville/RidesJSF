@@ -310,4 +310,21 @@ public class HibernateDataAccess {
 			db.close();
 		}
 	}
+	
+	public List<Ride> getArrivalCities() {
+		EntityManager db = JPAUtil.getEntityManager();
+		
+		try {
+	
+			List<Ride> res = new ArrayList<Ride>();	
+			TypedQuery<Ride> query = db.createQuery("SELECT r FROM Ride r",Ride.class);
+			List<Ride> rides = query.getResultList();
+		 	 for (Ride ride:rides){
+			   res.add(ride);
+			  }
+		 	 return res;
+		}finally {
+		 	 db.close();
+		}
+	}
 }
